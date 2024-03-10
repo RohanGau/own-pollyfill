@@ -6,3 +6,13 @@ Object.create = function (proto, props) {
   }
   return obj;
 };
+
+Object.create = function (proto, props) {
+  var destor = function (ps) {
+    if (ps) {
+      Object.defineProperty(this, ps);
+    }
+  };
+  destor.prototype = proto;
+  return new destor(props);
+};
