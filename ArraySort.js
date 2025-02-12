@@ -19,7 +19,8 @@ function partition(arr, low, high, compareFn) {
 function swap(arr, i, j) {
     [arr[i], arr[j]] = [arr[j], arr[i]];
 }
-    
+
+// using quick sort
 Array.prototype.mySort = function(compareFn) {
     const defaultFn = (a, b) => a - b;
     compareFn = compareFn || defaultFn;
@@ -34,6 +35,34 @@ Array.prototype.mySort = function(compareFn) {
     quickSort(this, 0, this.length-1)
     return this;
 }
+
+// using bubble sort
+Array.prototype.mySort = function(compareFn) {
+    const defaultFn = (a, b) => a - b;
+    compareFn = compareFn || defaultFn;
+    
+    // for more optimization we can introduce lastSwapIndex
+    let lastSwapped = this.length - 1;
+    for(let i = 0; i < this.length; i++) {
+        let swapped = false;
+        let currentSwappedIndex = 0;
+        for(let j = 0; j < lastSwapped; j++) {
+            if(compareFn(this[j], this[j+1]) > 0) {
+                let temp = this[j];
+                this[j] = this[j+1];
+                this[j+1] = temp;
+                swapped = true;
+                currentSwappedIndex = j;
+            }
+        }
+        lastSwapped = currentSwappedIndex;
+        if(swapped === false) break;
+    }
+    return this;
+}
+
+
+
 
 
 const array = [4, 6, 2, 5, 7, 9, 3];
